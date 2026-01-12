@@ -98,12 +98,14 @@ export default function DemoRadialScrollGalleryBento() {
               className="group relative w-[200px] h-[280px] sm:w-[240px] sm:h-[320px] overflow-hidden rounded-xl bg-card border border-border shadow-lg"
             >
               <div className="absolute inset-0 overflow-hidden">
-                <img
+                <Image
                   src={project.img}
                   alt={project.title}
-                  className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
+                  fill
+                  className={`object-cover transition-transform duration-700 ease-out ${
                     isActive ? 'scale-110 blur-0' : 'scale-100 blur-[1px] grayscale-[30%]'
                   }`}
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent opacity-60" />
               </div>

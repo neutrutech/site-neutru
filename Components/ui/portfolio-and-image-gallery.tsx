@@ -1,6 +1,5 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React, {
@@ -170,18 +169,20 @@ export const RadialScrollGallery = forwardRef<
       return () => observer.disconnect();
     }, [childrenCount]);
 
-    useGSAP(
-      () => {
-        if (!pinRef.current || !containerRef.current || childrenCount === 0)
-          return;
+    useEffect(() => {
+      if (!pinRef.current || !containerRef.current || childrenCount === 0)
+        return;
 
-        const prefersReducedMotion = window.matchMedia(
-          '(prefers-reduced-motion: reduce)'
-        ).matches;
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
 
-        if (!prefersReducedMotion) {
+      if (prefersReducedMotion) return;
+
+      const ctx = gsap.context(() => {
+        try {
           gsap.fromTo(
-            containerRef.current.children,
+            containerRef.current!.children,
             { scale: 0, autoAlpha: 0 },
             {
               scale: 1,
@@ -197,7 +198,7 @@ export const RadialScrollGallery = forwardRef<
             }
           );
 
-          gsap.to(containerRef.current, {
+          gsap.to(containerRef.current!, {
             rotation: 360,
             ease: 'none',
             scrollTrigger: {
@@ -209,18 +210,21 @@ export const RadialScrollGallery = forwardRef<
               invalidateOnRefresh: true,
             },
           });
+        } catch (e) {
+          // swallow animation errors in production to avoid breaking UI
+          // (logging could be added here if desired)
         }
-      },
-      {
-        scope: pinRef,
-        dependencies: [
-          scrollDuration,
-          currentRadius,
-          startTrigger,
-          childrenCount,
-        ],
-      }
-    );
+      }, pinRef);
+
+      return () => {
+        ctx.revert();
+      };
+    }, [
+      scrollDuration,
+      currentRadius,
+      startTrigger,
+      childrenCount,
+    ]);
 
     if (childrenCount === 0) return null;
 

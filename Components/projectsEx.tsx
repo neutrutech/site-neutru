@@ -28,7 +28,7 @@ export function HeroScrollDemo() {
       >
         <div className="max-w-6xl mx-auto w-full rounded-2xl overflow-hidden">
           <video
-            src="/v1.mp4"
+            src="/V1.mp4"
             height={720}
             width={1400}
             autoPlay
