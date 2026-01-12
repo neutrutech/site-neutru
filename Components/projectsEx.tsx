@@ -17,9 +17,9 @@ export function HeroScrollDemo() {
              <p className="text-center text-[#00868C] text-lg font-bold mb-2">
             UNICIDADE
           </p>
-            <h6 className="text-3xl font-normal text-black dark:text-white">
+            <h6 className="text-3xl font-normal text-white dark:text-white">
               Para Empresas ligadas ao modernismo <br />
-              <span className="text-2xl md:text-[5rem] font-bold mt-1 leading-none font-audiowide">
+              <span className="text-2xl md:text-[5rem] text-white dark:text-white font-bold mt-1 leading-none font-audiowide">
                    SOFTWARES ÚNICOS
               </span>
             </h6>
