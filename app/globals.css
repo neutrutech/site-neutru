@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -10,6 +11,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-audiowide: var(--font-audiowide);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +24,173 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-3 {
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.slide-in-left { animation: slideInLeft 700ms cubic-bezier(.22,.9,.35,1) both; }
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.slide-in-right { animation: slideInRight 700ms cubic-bezier(.22,.9,.35,1) both; }
+
+/* Slide out to left */
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-40px); }
+}
+.slide-out-left { animation: slideOutLeft 700ms cubic-bezier(.22,.9,.35,1) both; }
+
+/* Slide out to right */
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+.slide-out-right { animation: slideOutRight 700ms cubic-bezier(.22,.9,.35,1) both; }
+
+/* Custom button style requested by user */
+.button {
+  cursor: pointer;
+  font-size: 1rem; /* reduced from 1.4rem */
+  border-radius: 14px; /* slightly smaller for a compact look */
+  border: none;
+  padding: 2px;
+  background: radial-gradient(circle 80px at 80% -10%, #ffffff, #181b1b);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  gap: 8px;
+}
+.button::after {
+  content: "";
+  position: absolute;
+  width: 65%;
+  height: 60%;
+  border-radius: 120px;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 20px #ffffff38;
+  z-index: -1;
+}
+
+.blob1 {
+  position: absolute;
+  width: 56px; /* reduced width */
+  height: 100%;
+  border-radius: 12px;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(
+    circle 60px at 0% 100%,
+    #3fe9ff,
+    #0000ff80,
+    transparent
+  );
+  box-shadow: -10px 10px 30px #0051ff2d;
+}
+
+.inner {
+  padding: 10px 16px; /* reduced padding for smaller buttons */
+  border-radius: 12px;
+  color: #fff;
+  z-index: 3;
+  position: relative;
+  background: radial-gradient(circle 80px at 80% -50%, #777777, #0f1111);
+}
+.inner::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  background: radial-gradient(
+    circle 60px at 0% 100%,
+    #00e1ff1a,
+    #0000ff11,
+    transparent
+  );
+  position: absolute;
+}
+
+/* Apply as default to all native buttons unless they opt-out */
+/* Reset only minimal defaults for .button to avoid stripping native focus behavior */
+button.button { display: inline-block; cursor: pointer; }
+
+/* Inner element gets a subtle transparent border that fades in/out on hover */
+.button .inner {
+  padding: 10px 16px; /* match reduced inner padding */
+  border-radius: 12px;
+  color: #fff;
+  z-index: 3;
+  position: relative;
+  background: radial-gradient(circle 80px at 80% -50%, #777777, #0f1111);
+  border: 2px solid transparent;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 160ms ease;
+}
+
+.button:hover .inner {
+  border-color: rgba(255,255,255,0.65);
+  transform: translateY(-2px);
+}
+
+.button:active .inner {
+  transform: translateY(0);
+}
+
+.button:focus-visible .inner {
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(0,134,140,0.12);
+}
+
+.button .blob1 { position: absolute; width: 56px; height: 100%; border-radius: 12px; bottom: 0; left: 0; background: radial-gradient(circle 60px at 0% 100%, #3fe9ff, #0000ff80, transparent); box-shadow: -10px 10px 30px #0051ff2d; }
+
+/* Keep the previous .inner::before visual but ensure it's behind text */
+.button .inner::before { content: ""; width: 100%; height: 100%; left: 0; top: 0; border-radius: 14px; background: radial-gradient(circle 60px at 0% 100%, #00e1ff1a, #0000ff11, transparent); position: absolute; z-index: 1; }
+.button .inner > * { position: relative; z-index: 3; }
+
+@layer utilities {
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
 }
