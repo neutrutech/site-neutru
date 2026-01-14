@@ -21,7 +21,7 @@ export default function HeroSection() {
   const titles = [
     'UM NOVO PADRÃO\nDO MODERNO',
     'TRANSFORMAMOS\nO SEU NEGÓCIO',
-    'INOVAÇÃO, VELOCIDADE\nE CONFIANÇA'
+    'SOFTWARES FEITOS\nPARA VOCÊ'
   ];
 
   const descriptions = [

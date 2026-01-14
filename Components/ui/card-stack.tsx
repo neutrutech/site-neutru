@@ -21,6 +21,8 @@ export type CardStackItem = {
 
 export type CardStackProps<T extends CardStackItem> = {
   items: T[];
+  /** Whether the component is active (autoplay and interactions enabled) */
+  enabled?: boolean;
 
   /** Selected index on mount */
   initialIndex?: number;
@@ -108,6 +110,7 @@ export function CardStack<T extends CardStackItem>({
 
   loop = true,
   autoAdvance = false,
+  enabled = true,
   intervalMs = 2800,
   pauseOnHover = true,
 
@@ -158,12 +161,14 @@ export function CardStack<T extends CardStackItem>({
 
   // keyboard navigation (when container focused)
   const onKeyDown = (e: React.KeyboardEvent) => {
+    if (!enabled) return;
     if (e.key === "ArrowLeft") prev();
     if (e.key === "ArrowRight") next();
   };
 
   // autoplay
   React.useEffect(() => {
+    if (!enabled) return;
     if (!autoAdvance) return;
     if (reduceMotion) return;
     if (!len) return;
@@ -187,6 +192,7 @@ export function CardStack<T extends CardStackItem>({
     loop,
     active,
     next,
+    enabled,
   ]);
 
   if (!len) return null;
@@ -195,9 +201,9 @@ export function CardStack<T extends CardStackItem>({
 
   return (
     <div
-      className={cn("w-full", className)}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+      className={cn("w-full", className, enabled ? undefined : "opacity-60 pointer-events-none")}
+      onMouseEnter={() => enabled && setHovering(true)}
+      onMouseLeave={() => enabled && setHovering(false)}
     >
       {/* Stage */}
       <div
@@ -247,7 +253,7 @@ export function CardStack<T extends CardStackItem>({
               const zIndex = 100 - abs;
 
               // drag only on the active card
-              const dragProps = isActive
+              const dragProps = isActive && enabled
                 ? {
                     drag: "x" as const,
                     dragConstraints: { left: 0, right: 0 },
@@ -313,7 +319,7 @@ export function CardStack<T extends CardStackItem>({
                   }}
                   // translateZ via style transform (kept stable w/ motion values above)
                   // We apply translateZ by using a CSS transform in a child wrapper.
-                  onClick={() => setActive(i)}
+                  onClick={() => enabled && setActive(i)}
                   {...dragProps}
                 >
                   <div

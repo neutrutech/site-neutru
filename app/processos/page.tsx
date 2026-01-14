@@ -16,10 +16,10 @@ export default function ProcessosPage() {
         <>
             <Nav />
 
-            <main className="min-h-screen flex items-center justify-center bg-white text-[#0A0A0B]">
+            <main className="min-h-screen flex items-center justify-center bg-[#0A0A0B] text-white">
                 <div className="max-w-3xl text-center px-6 py-24">
-                    <h1 className="text-3xl md:text-4xl font-audiowide font-bold mb-4">Fique atento</h1>
-                    <p className="text-lg text-[#555]">Vamos documentar todo o processo de desenvolvimento aqui. Em breve teremos atualizações com detalhes, decisões e progresso.</p>
+                    <h1 className="text-3xl md:text-4xl font-audiowide font-bold mb-4">NOSSOS PROCESSOS SERÃO MOSTRADOS AQUI</h1>
+                    <p className="text-lg text-[#C1C1C1]">Vamos documentar todo o processo de desenvolvimento aqui. Em breve teremos atualizações com detalhes, decisões e progresso.</p>
                 </div>
             </main>
 

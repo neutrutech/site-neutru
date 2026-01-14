@@ -44,9 +44,9 @@ export function HeroScrollDemo() {
       <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6 mt-4 md:-mt-16 max-w-6xl mx-auto px-4 w-full">
         <p className="text-white text-sm md:text-base leading-relaxed max-w-full md:max-w-sm text-center md:text-left">
           Cada projeto reflete nossa dedicação 
-          <br className="block md:hidden" />
+          <br/>
            em transformar ideias em soluções concretas
-          <br className="block md:hidden" />
+          <br/>
           e eficazes, com design moderno e um visual superior.
         </p>
 
@@ -61,7 +61,7 @@ export function HeroScrollDemo() {
       </div>
 
       <div className="flex justify-center mt-6 md:-mt-20 px-4">
-        <button type="button" className="button w-full md:w-auto px-4 py-3 max-w-md" onClick={() => openEmail()}>
+        <a href="/projects" className="button w-full md:w-auto px-4 py-3 max-w-md">
           <span className="blob1" aria-hidden />
           <span className="inner flex items-center justify-center gap-2">
             Ver mais projectos
@@ -73,7 +73,7 @@ export function HeroScrollDemo() {
               className="w-4 h-4"
             />
           </span>
-        </button>
+        </a>
       </div>
     </div>
     </div>

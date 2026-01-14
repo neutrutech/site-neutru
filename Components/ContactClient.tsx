@@ -36,7 +36,7 @@ export default function ContactClient() {
                     <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                         <div className="text-white">
-                            <h1 className="text-3xl md:text-4xl font-audiowide font-normal mb-4">Contacte-nos</h1>
+                            <h1 className="text-3xl md:text-4xl font-audiowide font-normal mb-4">CONTACTE-NOS</h1>
                             <p className="text-[#B1B1B1] mb-6 font-semibold">Envie uma mensagem e entraremos em contacto<br/> assim que possível.</p>
 
                             <div className="space-y-4">

@@ -2,11 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { CircularTestimonials } from './ui/circular-testimonials';
-
 const testimonials = [
   {
     quote:
-      "I was impressed by the food! And I could really tell that they use high-quality ingredients. The staff was friendly and attentive. I'll definitely be back for more!",
+      "Cria interfaces e experiências digitais centradas no usuário, combinando estética e usabilidade.",
     name: "Ryan Amador",
     designation: "UI/UX Designer",
     src:
@@ -14,7 +13,7 @@ const testimonials = [
   },
   {
     quote:
-      "This place exceeded all expectations! The atmosphere is inviting, and the staff truly goes above and beyond. I'll keep returning for more exceptional dining experience.",
+      "Desenvolve e mantém aplicações, escrevendo código e solucionando problemas técnicos.",
     name: "Denzel Santos",
     designation: "Software Developer",
     src:
@@ -22,7 +21,7 @@ const testimonials = [
   },
   {
     quote:
-      "Shining Yam is a hidden gem! The impeccable service and overall attention to detail created a memorable experience. I highly recommend it!",
+      "Edita vídeos e cria conteúdo para redes sociais, trabalhando para maximizar alcance e engajamento.",
     name: "Gerson Baptista",
     designation: "Video Editor/Social Media Manager",
     src:
@@ -30,7 +29,7 @@ const testimonials = [
   },
   {
     quote:
-      "The team's attention to detail and commitment to excellence is unmatched. Every visit feels special, and the entire experience from start to finish is seamless and delightful!",
+      "Analisa requisitos, projeta e implementa soluções de software para melhorar processos e sistemas.",
     name: "Alcino Jaime",
     designation: "Anal. de Sistemas/Programador",
     src:

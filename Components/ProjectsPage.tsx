@@ -17,6 +17,9 @@ export default function DemoRadialScrollGalleryBento() {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const mobileSectionRef = useRef<HTMLDivElement | null>(null);
   const modalContentRef = useRef<HTMLDivElement | null>(null);
+  const cardStackRef = useRef<HTMLDivElement | null>(null);
+  const [cardEnabled, setCardEnabled] = useState(true);
+  const prevVisibleRef = useRef(false);
 
   useEffect(() => {
     const check = () => setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768);
@@ -51,12 +54,39 @@ export default function DemoRadialScrollGalleryBento() {
     }
   }, []);
 
+  // Observe CardStack visibility and enable/disable it accordingly
+  useEffect(() => {
+    if (!cardStackRef.current) return;
+    const el = cardStackRef.current;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const visible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+          // when it becomes visible now but wasn't before, scroll it to center
+          if (visible && !prevVisibleRef.current) {
+            try {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (e) {
+              /* ignore */
+            }
+          }
+          prevVisibleRef.current = visible;
+          setCardEnabled(visible);
+        });
+      },
+      { threshold: [0, 0.15, 0.5, 1], rootMargin: '0px 0px -20% 0px' },
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   if (isMobile) {
     return <ProjectsPageMobile />;
   }
 
   return (
-  <div className="bg-background min-h-[600px] mt-18 text-foreground overflow-hidden w-full">
+  <div className="bg-background min-h-[600px] mt-18 text-foreground overflow-visible w-full">
     <div ref={headerRef} className="h-[300px] flex flex-col items-center justify-center space-y-4 pt-8">
       <div className="space-y-1 text-center">
          <p className="text-center text-[#00868C] text-lg font-bold mb-2">
@@ -72,7 +102,9 @@ export default function DemoRadialScrollGalleryBento() {
     </div>
 
     <div>
-      <CardStackDemoPage />
+      <div ref={cardStackRef}>
+        <CardStackDemoPage enabled={cardEnabled} />
+      </div>
 
       <div className="mt-32 mb-6 px-4 flex flex-col items-center justify-center mx-auto text-center max-w-2xl">
         <h4 ref={mobileSectionRef} className="text-3xl md:text-4xl font-audiowide font-normal mb-4">PROECTOS MOBILE</h4>

@@ -8,8 +8,8 @@ export default function StatsBand() {
 
   const stats = [
     { label: 'Projectos Entregues', value: 100 },
-    { label: 'Clientes Satisfeitos', value: 85 },
-    { label: 'Anos de Experiência', value: 12 },
+    { label: 'Clientes Satisfeitos', value: 98, isPercent: true },
+    { label: 'Anos de Experiência', value: 1 },
     { label: 'Horas de Desenvolvimento', value: 2500 },
   ];
 
@@ -17,15 +17,15 @@ export default function StatsBand() {
     const el = bandRef.current;
     if (!el) return;
 
-    const animateValue = (el: HTMLSpanElement, to: number, duration = 1400) => {
+    const animateValue = (el: HTMLSpanElement, to: number, duration = 1400, isPercent = false) => {
       const start = performance.now();
       const from = 0;
       const loop = (now: number) => {
         const t = Math.min((now - start) / duration, 1);
         const current = Math.floor(from + (to - from) * t);
-        el.textContent = `+${current.toLocaleString()}`;
+        el.textContent = isPercent ? `${current}%` : `+${current.toLocaleString()}`;
         if (t < 1) requestAnimationFrame(loop);
-        else el.textContent = `+${to.toLocaleString()}`;
+        else el.textContent = isPercent ? `${to}%` : `+${to.toLocaleString()}`;
       };
       requestAnimationFrame(loop);
     };
@@ -38,7 +38,7 @@ export default function StatsBand() {
             // trigger animations for each stat
             stats.forEach((s, i) => {
               const span = valueRefs.current[i];
-              if (span) animateValue(span, s.value, 1400 + i * 200);
+              if (span) animateValue(span, s.value, 1400 + i * 200, Boolean((s as any).isPercent));
             });
             io.disconnect();
             break;
@@ -59,8 +59,8 @@ export default function StatsBand() {
           {stats.map((s, i) => (
             <div key={s.label} className="text-center">
               <p className="font-normal text-[#D1D1D1]/40 text-lg md:text-xl mb-2">{s.label}</p>
-              <p className="text-4xl md:text-6xl font-audiowide font-normal text-white">
-                <span ref={(el) => { valueRefs.current[i] = el; }}>+0</span>
+                <p className="text-4xl md:text-6xl font-audiowide font-normal text-white">
+                <span ref={(el) => { valueRefs.current[i] = el; }}>{s.isPercent ? '0%' : '+0'}</span>
               </p>
             </div>
           ))}
