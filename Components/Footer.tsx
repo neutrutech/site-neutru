@@ -33,10 +33,10 @@ export default function Footer() {
           <div className="w-full md:w-auto text-center md:text-left">
             <p className="font-bold text-lg sm:text-xl mb-3">Links Rápidos</p>
             <nav className="flex flex-col gap-2 sm:gap-3 justify-center md:justify-start">
-              <a href="#sobre" className="text-gray-300 hover:text-[#00868C]">Sobre</a>
-              <a href="#servicos" className="text-gray-300 hover:text-[#00868C]">Serviços</a>
-              <a href="#projectos" className="text-gray-300 hover:text-[#00868C]">Projectos</a>
-              <a href="#contacto" className="text-gray-300 hover:text-[#00868C]">Contacto</a>
+              <a href="/services" className="text-gray-300 hover:text-[#00868C]">Serviços</a>
+              <a href="/projects" className="text-gray-300 hover:text-[#00868C]">Projectos</a>
+              <a href="/processos" className="text-gray-300 hover:text-[#00868C]">Processos</a>
+              <a href="/contact" className="text-gray-300 hover:text-[#00868C]">Contacto</a>
             </nav>
           </div>
 

@@ -46,7 +46,8 @@ export default function Partners() {
     };
   }, []);
 
-  const logos = ['Logo001.png', 'Logo002.png', 'Logo003.png', 'Logo0004.png'];
+  // Note: filename must match case-sensitive public files for production builds
+  const logos = ['Logo001.png', 'Logo002.png', 'Logo003.png', 'Logo0004.PNG'];
 
   return (
     <section ref={sectionRef} className="w-full bg-[#0A0A0B] py-16 relative z-20">
